@@ -1,0 +1,17 @@
+[package]
+name = "crfmnes"
+version = "1.0.0"
+edition = "2021"
+repository = "https://github.com/millardjn/crfmnes"
+readme = "README.md"
+license = "MIT"
+description = "CR-FM-NES (Cost-Reduction Fast Moving Natural Evolution Strategy Optimiser) implemented via nalgebra"
+
+[dependencies]
+rand = "0.8"
+rand_distr = "0.4"
+nalgebra = "0.33"
+
+[dev-dependencies]
+rand_xoshiro = "0.6"
+num = "0.4"
