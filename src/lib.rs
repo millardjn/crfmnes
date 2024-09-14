@@ -178,7 +178,6 @@ struct State {
 ///     }
 /// }
 /// println!("best: {} best_x: {}", best, best_x);
-/// panic!();
 /// ```
 #[derive(Clone, Debug)]
 pub struct CrfmnesOptimizer {
