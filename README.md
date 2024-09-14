@@ -1,6 +1,7 @@
 <p align="center">
     <a href="https://crates.io/crates/crfmnes"><img src="https://img.shields.io/crates/v/crfmnes.svg" alt="crates.io"></a>
     <a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="MIT License"></a>
+    <img src= "https://github.com/millardjn/crfmnes/actions/workflows/build.yml/badge.svg" alt="MIT License">
 </p>
 
 # CR-FM-NES Optimiser
