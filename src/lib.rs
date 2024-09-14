@@ -445,13 +445,13 @@ impl<'a> Trial<'a> {
     /// # Panics
     /// If `evs.len() != x.len()` this method will panic.
     #[allow(non_snake_case)]
-    pub fn tell(&mut self, evs: Vec<f64>) -> Result<(), TrialError> {
+    pub fn tell(&mut self, evs: &[f64]) -> Result<(), TrialError> {
         // Read this method in conjunction with the paper, as the same variable names are used.
 
         assert_eq!(evs.len(), self.x.ncols());
 
         // This operation assumes that if the solution is infeasible, infinity comes in as input.
-        let lamb_feas = num_feasible(&evs);
+        let lamb_feas = num_feasible(evs);
 
         if lamb_feas == 0 {
             return Err(TrialError::NoFeasibleSolutions);
@@ -468,7 +468,7 @@ impl<'a> Trial<'a> {
         let lamb = self.opt.lamb;
         let dim = self.opt.dim;
 
-        let sorted_indices = sort_indices_by(&evs, self.z.as_view());
+        let sorted_indices = sort_indices_by(evs, self.z.as_view());
 
         let x = DMatrix::from_fn(dim, lamb, |row, col| {
             *self.x.get((row, sorted_indices[col])).unwrap()
