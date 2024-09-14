@@ -117,26 +117,37 @@ fn sort_index(primary: &[f64], secondary: &[f64]) -> Vec<usize> {
 
 #[derive(Clone, Debug)]
 #[allow(non_snake_case)]
-struct State {
-    sigma: f64,
+pub struct State {
+    /// Scale of the sampling distribution
+    pub sigma: f64,
 
-    /// dim x 1
-    m: DVector<f64>,
+    /// The mean of the sampling distribution
+    /// 
+    /// Column vector (dim x 1)
+    pub m: DVector<f64>,
 
-    /// dim x 1
-    D: DVector<f64>,
+    /// Scale of the sampling distribution along each axis of the problem
+    /// 
+    /// Column vector (dim x 1)
+    pub D: DVector<f64>,
 
-    /// dim x 1
-    v: DVector<f64>,
+    /// A principal component vector that can scales the sampling distribution in a single off-axis direction
+    /// 
+    /// Column vector (dim x 1)
+    pub v: DVector<f64>,
 
-    /// dim x 1
-    pc: DVector<f64>,
+    /// Anisotropic evolution path
+    /// 
+    /// Column vector (dim x 1)
+    pub pc: DVector<f64>,
 
-    /// dim x 1
-    ps: DVector<f64>,
+    /// Isotropic evolution path
+    /// 
+    /// Column vector (dim x 1)
+    pub ps: DVector<f64>,
 
     /// number of trials/generations
-    g: usize,
+    pub g: usize,
 }
 
 /// High-dimension black box optimiser with an ask-tell interface.
@@ -171,7 +182,7 @@ struct State {
 ///         }
 ///     }
 ///
-///     trial.tell(evs).unwrap();
+///     trial.tell(&evs).unwrap();
 ///
 ///     if best < 0.001 {
 ///         break;
@@ -315,6 +326,11 @@ impl CrfmnesOptimizer {
                 g: 0,
             },
         }
+    }
+
+    /// Access the state of the optimiser
+    pub fn state(&self) -> &State {
+        &self.state
     }
 
     /// Ask the optimiser to supply a new set of sample points to be evaluated.
